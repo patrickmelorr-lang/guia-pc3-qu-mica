@@ -1,0 +1,474 @@
+A continuación, presento el código HTML completo y estructurado que contiene toda la teoría, los problemas resueltos paso a paso y el diseño académico y profesional solicitado (sin emojis y con la integración de MathJax para que todas las fórmulas matemáticas, fracciones y ecuaciones se rendericen con calidad de libro de texto).
+
+Puedes copiar este código, guardarlo en un archivo con extensión `.html` (por ejemplo, `Guia_Quimica_General.html`) y abrirlo directamente en cualquier navegador web.
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material de Estudio Académico - Química General</title>
+
+    <!-- Integración de MathJax para renderizado profesional de matemáticas -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #1b263b;
+            --secondary-color: #415a77;
+            --accent-color: #778da9;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #2b2d42;
+            --border-color: #e0e1dd;
+            --highlight: #9d0208;
+            --success: #2d6a4f;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5em;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h2 {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 4px;
+            margin-top: 50px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .teoria-box {
+            background: #f1f5f9;
+            border-left: 5px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .formula-box {
+            background: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid var(--accent-color);
+            overflow-x: auto;
+        }
+
+        details {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            transition: all 0.2s ease;
+        }
+
+        details[open] {
+            border-left: 5px solid var(--highlight);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        summary {
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            color: var(--primary-color);
+            outline: none;
+            padding: 5px 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .enunciado {
+            background-color: #fff8f0;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            border-left: 4px solid #f4a261;
+            font-style: italic;
+        }
+
+        .solucion {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .respuesta-final {
+            font-weight: bold;
+            color: var(--success);
+            background-color: #e8f5e9;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* CSS Diagrama de Fase Simple */
+        .diagrama-contenedor {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .diagrama {
+            border: 2px solid var(--text-color);
+            width: 400px;
+            height: 300px;
+            position: relative;
+            background: linear-gradient(to top right, #e0f7fa 0%, #fff3e0 50%, #fbe9e7 100%);
+        }
+        .eje-y { position: absolute; top: -30px; left: -20px; transform: rotate(-90deg); transform-origin: left bottom; font-weight: bold; font-family: sans-serif; font-size: 0.9em;}
+        .eje-x { position: absolute; bottom: -30px; left: 35%; font-weight: bold; font-family: sans-serif; font-size: 0.9em;}
+        .etiqueta { position: absolute; font-weight: bold; font-family: sans-serif;}
+        .lbl-solido { top: 30%; left: 15%; color: #0277bd; }
+        .lbl-liquido { top: 20%; left: 55%; color: #1565c0; }
+        .lbl-gas { bottom: 20%; right: 20%; color: #e65100; }
+        
+        .linea-fusion { position: absolute; border-left: 2px solid #000; height: 120px; left: 35%; bottom: 40%; transform: rotate(15deg); }
+        .linea-vapor { position: absolute; border-bottom: 2px solid #000; width: 220px; left: 35%; bottom: 40%; transform: rotate(-35deg); transform-origin: left bottom;}
+        .linea-sublim { position: absolute; border-bottom: 2px solid #000; width: 160px; left: 0%; bottom: 10%; transform: rotate(-25deg); transform-origin: left bottom;}
+        
+        .punto-triple { position: absolute; width: 10px; height: 10px; background: red; border-radius: 50%; left: 33.5%; bottom: 38%; }
+        .punto-critico { position: absolute; width: 10px; height: 10px; background: purple; border-radius: 50%; right: 10%; top: 12%; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Material de Estudio: Química General</h1>
+    <p style="text-align: center; font-style: italic;">Compendio exhaustivo de teoría y resolución analítica de problemas.</p>
+
+    <!-- SECCIÓN I -->
+    <h2>I. Estequiometría, Moles y Reactivo Limitante</h2>
+    
+    <div class="teoria-box">
+        <h3>Conceptos Fundamentales</h3>
+        <p>El <strong>mol</strong> es la unidad base del Sistema Internacional para medir cantidad de sustancia. Equivale a la constante de Avogadro ($N_A = 6.022 \times 10^{23}$ entidades). La <strong>masa molar ($M$)</strong> permite relacionar la masa de una sustancia con su cantidad en moles.</p>
+        <div class="formula-box">
+            $$n = \frac{m}{M}$$
+            <span style="font-size:0.85em;">(Donde: $n$ = moles, $m$ = masa en gramos, $M$ = Masa molar en g/mol)</span>
+        </div>
+        <p>En las reacciones químicas, el <strong>Reactivo Limitante</strong> es el que se consume primero, definiendo la cantidad máxima de producto (rendimiento teórico). El rendimiento real siempre es influenciado por variables experimentales.</p>
+        <div class="formula-box">
+            $$\% \text{ Rendimiento} = \left( \frac{\text{Rendimiento Experimental}}{\text{Rendimiento Teórico}} \right) \times 100$$
+        </div>
+    </div>
+
+    <h3>Resolución de Problemas (13 - 24)</h3>
+
+    <details>
+        <summary>Problema 13: Balanceo de Ecuaciones</summary>
+        <div class="enunciado">
+            Balancee las siguientes ecuaciones químicas e indique el tipo de reacción:<br>
+            a. $Mg_{(s)} + HCl_{(ac)} \rightarrow MgCl_{2(ac)} + H_{2(g)}$<br>
+            b. $Zn_{(s)} + CuSO_{4(ac)} \rightarrow ZnSO_{4(ac)} + Cu_{(s)}$<br>
+            c. $FeCl_{3(ac)} + NaOH_{(ac)} \rightarrow NaCl_{(ac)} + Fe(OH)_{3(s)}$<br>
+            d. $AgNO_{3(ac)} + Cu_{(s)} \rightarrow Cu(NO_3)_{2(ac)} + Ag_{(s)}$
+        </div>
+        <div class="solucion">
+            <ul>
+                <li><strong>a.</strong> $Mg_{(s)} + 2HCl_{(ac)} \rightarrow MgCl_{2(ac)} + H_{2(g)}$ (Desplazamiento Simple)</li>
+                <li><strong>b.</strong> $Zn_{(s)} + CuSO_{4(ac)} \rightarrow ZnSO_{4(ac)} + Cu_{(s)}$ (Ya se encuentra balanceada. Desplazamiento Simple)</li>
+                <li><strong>c.</strong> $FeCl_{3(ac)} + 3NaOH_{(ac)} \rightarrow 3NaCl_{(ac)} + Fe(OH)_{3(s)}$ (Doble Desplazamiento / Precipitación)</li>
+                <li><strong>d.</strong> $2AgNO_{3(ac)} + Cu_{(s)} \rightarrow Cu(NO_3)_{2(ac)} + 2Ag_{(s)}$ (Desplazamiento Simple)</li>
+            </ul>
+        </div>
+    </details>
+
+    <details>
+        <summary>Problema 14: Formación de Sulfato de Bario</summary>
+        <div class="enunciado">
+            ¿Cuántas moles de sulfato de bario pueden formarse a partir de 78 gramos de cloruro de bario? (Masas atómicas: Ba = 137, Cl = 35.5).<br>
+            $BaCl_{2(ac)} + Na_2SO_{4(ac)} \rightarrow BaSO_{4(s)} + 2NaCl_{(ac)}$
+        </div>
+        <div class="solucion">
+            <p>1. Calculamos la masa molar del Cloruro de Bario ($BaCl_2$):<br>
+            $$M = 137 + 2(35.5) = 208 \text{ g/mol}$$</p>
+            <p>2. Hallamos los moles iniciales:<br>
+            $$n = \frac{78 \text{ g}}{208 \text{ g/mol}} = 0.375 \text{ mol de } BaCl_2$$</p>
+            <p>3. Por estequiometría, la relación es 1:1. <br>
+            <span class="respuesta-final">Se formarán 0.375 moles de $BaSO_4$.</span></p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Problema 15: Producción de Acetileno</summary>
+        <div class="enunciado">
+            Calcule la masa de carburo de calcio ($CaC_2$) necesarios para obtener 25 gramos de acetileno ($C_2H_2$).<br>
+            $CaC_{2(s)} + 2H_2O_{(l)} \rightarrow C_2H_{2(g)} + Ca(OH)_{2(ac)}$
+        </div>
+        <div class="solucion">
+            <p>1. Masas molares:<br>
+            $C_2H_2 = 2(12) + 2(1) = 26 \text{ g/mol}$.<br>
+            $CaC_2 = 40 + 2(12) = 64 \text{ g/mol}$.</p>
+            <p>2. Moles de acetileno requeridos:<br>
+            $$n = \frac{25 \text{ g}}{26 \text{ g/mol}} = 0.9615 \text{ mol}$$</p>
+            <p>3. Relación estequiométrica (1:1): Se necesitan 0.9615 mol de $CaC_2$.<br>
+            $$m = 0.9615 \text{ mol} \times 64 \text{ g/mol} = 61.54 \text{ g}$$
+            <span class="respuesta-final">Masa requerida: 61.54 gramos de $CaC_2$.</span></p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Problema 18: Rendimiento en Síntesis de Aspirina</summary>
+        <div class="enunciado">
+            $C_7H_6O_3 + C_4H_6O_3 \rightarrow C_9H_8O_4 + C_2H_4O_2$<br>
+            a) Calcule el rendimiento teórico de aspirina cuando reaccionan 185 kg de ácido salicílico con 125 kg de anhídrido acético.<br>
+            b) Si se producen solo 182 kg, calcule el rendimiento porcentual.<br>
+            c) Si el rendimiento es del 87%, ¿qué masa de ácido salicílico debe usarse para producir 75 kg de aspirina?
+        </div>
+        <div class="solucion">
+            <p><strong>Masas Molares:</strong> Salicílico ($C_7H_6O_3$) = 138 g/mol; Anhídrido ($C_4H_6O_3$) = 102 g/mol; Aspirina ($C_9H_8O_4$) = 180 g/mol.</p>
+            <p><strong>a) Rendimiento Teórico:</strong><br>
+            Moles Salicílico = $185 / 138 = 1.34 \text{ kmol}$<br>
+            Moles Anhídrido = $125 / 102 = 1.225 \text{ kmol}$<br>
+            El Reactivo Limitante es el Anhídrido (menor cantidad).<br>
+            Masa teórica de Aspirina = $1.225 \text{ kmol} \times 180 \text{ kg/kmol} = 220.5 \text{ kg}$</p>
+            
+            <p><strong>b) Rendimiento Porcentual:</strong><br>
+            $$\%R = \left( \frac{182}{220.5} \right) \times 100 = 82.5\%$$</p>
+
+            <p><strong>c) Masa Requerida (Rendimiento 87%):</strong><br>
+            Teórico necesario = $\frac{75 \text{ kg}}{0.87} = 86.2 \text{ kg}$ de Aspirina.<br>
+            Moles de Aspirina = $\frac{86.2 \text{ kg}}{180 \text{ kg/kmol}} = 0.479 \text{ kmol}$.<br>
+            Masa Salicílico = $0.479 \text{ kmol} \times 138 \text{ kg/kmol} = $<span class="respuesta-final">66.1 kg.</span></p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Problema 24: Análisis de Mezcla (Butano y Oxígeno)</summary>
+        <div class="enunciado">
+            Se mezcla butano ($C_4H_8$) con 100 gramos oxígeno ($O_2$) de modo que el primero constituye el 40% en masa de la mezcla. Considerando una combustión completa:<br>
+            a) Determine el reactivo limitante.<br>
+            b) Determine el exceso del otro reactivo en gramos.<br>
+            c) Determine la masa de vapor de agua formada.
+        </div>
+        <div class="solucion">
+            <p><em>(Nota: El texto formula al Butano como $C_4H_8$, estructuralmente correspondiente al Buteno. Para fines académicos y consistencia estequiométrica, resolveremos empleando la masa molar correspondiente a la fórmula dictada: $M = 56 \text{ g/mol}$).</em></p>
+            
+            <p><strong>Paso 1: Masas Iniciales.</strong><br>
+            El $O_2$ representa el 60% de la mezcla. Si el 60% equivale a 100 g, el total es $166.67$ g.<br>
+            Masa de $C_4H_8$ (40%) = $166.67 - 100 = 66.67 \text{ g}$.</p>
+
+            <p><strong>Paso 2: Ecuación Balanceada.</strong><br>
+            $$C_4H_8 + 6O_2 \rightarrow 4CO_2 + 4H_2O$$
+            Moles $C_4H_8$: $\frac{66.67 \text{ g}}{56 \text{ g/mol}} = 1.19 \text{ mol}$.<br>
+            Moles $O_2$: $\frac{100 \text{ g}}{32 \text{ g/mol}} = 3.125 \text{ mol}$.</p>
+
+            <p><strong>a) Reactivo Limitante:</strong><br>
+            Ratio del butano: $1.19 / 1 = 1.19$<br>
+            Ratio del oxígeno: $3.125 / 6 = 0.52$<br>
+            <span class="respuesta-final">El reactivo limitante es el Oxígeno ($O_2$).</span></p>
+
+            <p><strong>b) Exceso del otro reactivo:</strong><br>
+            Calculamos cuánto $C_4H_8$ reacciona realmente usando el limitante ($O_2$):<br>
+            $$3.125 \text{ mol } O_2 \times \left( \frac{1 \text{ mol } C_4H_8}{6 \text{ mol } O_2} \right) = 0.521 \text{ mol de } C_4H_8 \text{ reaccionan.}$$
+            Moles en exceso: $1.19 - 0.521 = 0.669 \text{ mol}$.<br>
+            Masa en exceso: $0.669 \text{ mol} \times 56 \text{ g/mol} =$ <span class="respuesta-final">37.46 gramos de $C_4H_8$ en exceso.</span></p>
+
+            <p><strong>c) Masa de vapor de agua formada:</strong><br>
+            $$n_{H_2O} = 3.125 \text{ mol } O_2 \times \left( \frac{4 \text{ mol } H_2O}{6 \text{ mol } O_2} \right) = 2.083 \text{ mol de } H_2O$$
+            Masa $H_2O = 2.083 \text{ mol} \times 18 \text{ g/mol} =$ <span class="respuesta-final">37.5 gramos.</span></p>
+        </div>
+    </details>
+
+    <hr style="border: 1px solid var(--border-color); margin: 40px 0;">
+
+    <!-- SECCIÓN II -->
+    <h2>II. Estados de la Materia y Diagramas de Fase</h2>
+
+    <div class="teoria-box">
+        <h3>Leyes Termodinámicas Visualizadas</h3>
+        <p>Un <strong>Diagrama de Fases</strong> mapea las condiciones de Presión y Temperatura bajo las cuales una sustancia existe como sólido, líquido o gas. Las curvas representan estados de equilibrio entre dos fases contiguas.</p>
+        <div class="diagrama-contenedor">
+            <div class="diagrama">
+                <div class="eje-y">Presión (atm) &rarr;</div>
+                <div class="eje-x">Temperatura (K) &rarr;</div>
+                
+                <div class="etiqueta lbl-solido">SÓLIDO</div>
+                <div class="etiqueta lbl-liquido">LÍQUIDO</div>
+                <div class="etiqueta lbl-gas">GAS</div>
+                
+                <div class="linea-sublim"></div>
+                <div class="linea-fusion"></div>
+                <div class="linea-vapor"></div>
+                
+                <div class="punto-triple"></div>
+                <div class="punto-critico"></div>
+            </div>
+        </div>
+        <p>El <strong>Punto Triple</strong> denota las condiciones exactas donde coexisten sólido, líquido y gas. Si este punto se sitúa por encima de 1 atm de presión, la sustancia, al calentarse a presión ambiental, transitará directamente de sólido a gas, proceso conocido como <strong>Sublimación</strong>.</p>
+    </div>
+
+    <h3>Resolución de Problemas (26 - 29)</h3>
+
+    <details>
+        <summary>Problema 26: Análisis Planetario en Marte</summary>
+        <div class="enunciado">
+            A condiciones de $T = -10^\circ C$ y presión atmosférica $7 \text{ milibares}$, ¿Cuál es el estado físico de la sustancia A (Agua) y la sustancia B (Dióxido de Carbono)? Demuéstrelo gráficamente.
+        </div>
+        <div class="solucion">
+            <p><strong>1. Conversión de Unidades:</strong><br>
+            Presión en Marte = $7 \text{ mbar} = 0.007 \text{ bar} \approx 0.0069 \text{ atm}$.</p>
+            <p><strong>2. Análisis para Sustancia A (Agua):</strong><br>
+            El punto triple del agua se ubica a $0.01^\circ C$ y $0.006 \text{ atm}$. A $0.0069 \text{ atm}$ nos encontramos ligeramente por encima de la línea de sublimación, y la temperatura de $-10^\circ C$ nos sitúa a la izquierda de la línea de fusión. <br>
+            <span class="respuesta-final">Estado del Agua: SÓLIDO (Hielo).</span></p>
+            <p><strong>3. Análisis para Sustancia B ($CO_2$):</strong><br>
+            El punto triple del $CO_2$ se ubica a $-56.4^\circ C$ y $5.11 \text{ atm}$. La presión marciana ($0.0069 \text{ atm}$) está drásticamente por debajo del punto triple, situándonos directamente en la zona inferior de la curva.<br>
+            <span class="respuesta-final">Estado del $CO_2$: GASEOSO.</span></p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Problema 29: Alteración del Punto de Ebullición por Altitud</summary>
+        <div class="enunciado">
+            Se determina el punto de ebullición de 100 mL de agua en Lima (nivel del mar) y en Cusco (3400 msnm). ¿Cuál de las opciones es cierta y por qué?
+        </div>
+        <div class="solucion">
+            <p><strong>Fundamento:</strong> Un líquido hierve en el momento en que su presión de vapor se iguala a la presión atmosférica del entorno.</p>
+            <p>En Lima (nivel del mar), la columna de aire es mayor, por lo que la presión atmosférica es de aproximadamente 1 atm (760 mmHg). En Cusco, al estar a gran altitud, la presión atmosférica es considerablemente menor.<br>
+            Al haber menor presión externa en Cusco, el agua requerirá alcanzar una menor presión de vapor (y por ende, requerirá menor temperatura) para igualar dicha presión ambiental e iniciar la ebullición.</p>
+            <p><span class="respuesta-final">Opción Correcta: a) El punto de ebullición del agua será mayor en Lima.</span></p>
+        </div>
+    </details>
+
+    <hr style="border: 1px solid var(--border-color); margin: 40px 0;">
+
+    <!-- SECCIÓN III -->
+    <h2>III. El Estado Gaseoso: Leyes y Presiones Parciales</h2>
+
+    <div class="teoria-box">
+        <h3>Ecuación General y Estandarización</h3>
+        <p>Las propiedades físicas de un gas ideal son descritas por la ecuación de estado:</p>
+        <div class="formula-box">
+            $$P \cdot V = n \cdot R \cdot T$$
+        </div>
+        <p>A Condiciones Estándar (CE o CN), esto implica una Presión de $1 \text{ atm}$ y una Temperatura de $0^\circ C$ ($273.15 \text{ K}$). Bajo estos parámetros, un mol de cualquier gas ideal ocupará un volumen constante de <strong>22.4 L</strong>.</p>
+    </div>
+
+    <h3>Resolución de Problemas (30 - 42)</h3>
+
+    <details>
+        <summary>Problemas 30 y 31: Interpretación de Manómetros</summary>
+        <div class="enunciado">
+            30. Determine la presión absoluta del gas con un manómetro de extremo abierto, donde el nivel expuesto al aire es más bajo por 40 cm (diferencia asumiendo marcas directas).<br>
+            31. Determinar la presión atmosférica si la presión del gas es 1.68 atm en un sistema de doble tubo U.
+        </div>
+        <div class="solucion">
+            <p><strong>Solución al 30:</strong><br>
+            En un manómetro de tubo en U abierto, si el nivel del líquido está más bajo del lado del gas, la presión del gas empuja más fuerte que la atmósfera. Asumiendo la diferencia neta de altura $\Delta h = 50 - 10 = 40 \text{ cm} = 400 \text{ mmHg}$.<br>
+            $$P_{gas} = P_{atm} + \Delta h = 760 \text{ mmHg} + 400 \text{ mmHg} = 1160 \text{ mmHg} \text{ (1.52 atm)}$$</p>
+            <p><strong>Solución al 31:</strong><br>
+            Analizamos desde el exterior hacia el interior. El tubo de la derecha está abierto a $P_{atm}$ y su rama abierta es 40 cm más alta. Esto significa que el gas intermedio tiene una presión: $P_{medio} = P_{atm} + 40 \text{ cmHg}$.<br>
+            El tubo de la izquierda tiene su rama conectada al gas medio 20 cm más alta que la del gas principal. Por tanto, el gas principal tiene una presión: $P_{gas} = P_{medio} + 20 \text{ cmHg}$.<br>
+            Consolidando la ecuación:<br>
+            $$P_{gas} = P_{atm} + 40 + 20 = P_{atm} + 60 \text{ cmHg}$$
+            Sabiendo que $P_{gas} = 1.68 \text{ atm} = 1276.8 \text{ mmHg}$ y $60 \text{ cmHg} = 600 \text{ mmHg}$:<br>
+            $$1276.8 = P_{atm} + 600 \implies P_{atm} = 676.8 \text{ mmHg} = 0.89 \text{ atm}$$</p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Problema 33: Compresión Isotérmica</summary>
+        <div class="enunciado">
+            Un gas se comprime a temperatura constante de modo que disminuye su volumen al 20% del inicial. Determine en qué porcentaje varía su presión.
+        </div>
+        <div class="solucion">
+            <p>Aplicando la <strong>Ley de Boyle</strong> ($T$ constante):<br>
+            $$P_1 V_1 = P_2 V_2$$</p>
+            <p>Si el volumen final es el 20% del inicial, $V_2 = 0.20 \cdot V_1$. Sustituyendo:<br>
+            $$P_1 V_1 = P_2 (0.20 V_1) \implies P_2 = \frac{P_1}{0.20} = 5 P_1$$</p>
+            <p>La presión final es 5 veces la presión inicial. Esto representa un incremento sobre el valor base ($100\% \rightarrow 500\%$).<br>
+            <span class="respuesta-final">La presión aumenta en un 400%.</span></p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Problema 36: Identificación por Masa Molar</summary>
+        <div class="enunciado">
+            Matraz 1: $V=1 \text{ L}, P=X \text{ atm}, m=4.8 \text{ g}$.<br>
+            Matraz 2: $V=3 \text{ L}, P=0.1X \text{ atm}, m=0.36 \text{ g}$.<br>
+            A idéntica temperatura, ¿Cuál matraz contiene el gas con mayor masa molar?
+        </div>
+        <div class="solucion">
+            <p>Partiendo de $PV = nRT = \frac{m}{M}RT$, despejamos la Masa Molar ($M$): $$M = \frac{m R T}{P V}$$</p>
+            <p><strong>Para el Matraz 1:</strong><br>
+            $$M_1 = \frac{4.8 \cdot R \cdot T}{X \cdot 1} = 4.8 \frac{RT}{X}$$</p>
+            <p><strong>Para el Matraz 2:</strong><br>
+            $$M_2 = \frac{0.36 \cdot R \cdot T}{0.1X \cdot 3} = \frac{0.36 \cdot RT}{0.3X} = 1.2 \frac{RT}{X}$$</p>
+            <p><span class="respuesta-final">El gas del Matraz 1 tiene mayor masa molar (4 veces mayor que el del Matraz 2).</span></p>
+        </div>
+    </details>
+
+    <details>
+        <summary>Problema 40: Difusión de Gases (Ley de Graham)</summary>
+        <div class="enunciado">
+            Si la velocidad de difusión del $SO_3$ es de $50 \text{ L/s}$, determine en qué tiempo se difunde todo el metano ($CH_4$) contenido en un cilindro de $250\sqrt{5}$ L a iguales condiciones.
+        </div>
+        <div class="solucion">
+            <p><strong>Ley de Graham:</strong> La velocidad de difusión es inversamente proporcional a la raíz cuadrada de la masa molar.<br>
+            Masas molares: $SO_3 = 80 \text{ g/mol}$; $CH_4 = 16 \text{ g/mol}$.</p>
+            <div class="formula-box">
+                $$\frac{v_{CH_4}}{v_{SO_3}} = \sqrt{\frac{M_{SO_3}}{M_{CH_4}}} = \sqrt{\frac{80}{16}} = \sqrt{5}$$
+            </div>
+            <p>Sustituyendo $v_{SO_3} = 50 \text{ L/s}$:<br>
+            $$v_{CH_4} = 50 \sqrt{5} \text{ L/s}$$</p>
+            <p>Calculando el tiempo requerido para evacuar el volumen dado:<br>
+            $$t = \frac{\text{Volumen}}{\text{Velocidad}} = \frac{250\sqrt{5} \text{ L}}{50\sqrt{5} \text{ L/s}} = 5 \text{ segundos}$$
+            <span class="respuesta-final">El metano se difunde en 5 segundos.</span></p>
+        </div>
+    </details>
+
+</div>
+
+</body>
+</html>
+
+```
